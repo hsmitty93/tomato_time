@@ -1,6 +1,13 @@
 import React from 'react';
+
+//Material Components
+import { Grid } from '@material-ui/core';
+
+//Styles
 import { createMuiTheme } from '@material-ui/core/styles';
 import './App.css';
+
+//Local Components
 import { Content } from './components/content';
 
 const theme1 = createMuiTheme({
@@ -38,18 +45,17 @@ const theme3 = createMuiTheme({
 
 export default function App() {
   return (
-    <div className="App">
+    <div className="App" >
+
       <header className="header">
         <h1 className="title">TomoTime</h1>
       </header>
-      <div className="content">
-        <Content />
-      </div>
-      <div className="footer">
-        <footer className="footer">
-          <div style={{ justifySelf: "center" }}>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-        </footer>
-      </div>
+
+      <Content />
+
+      <footer className="footer">
+        <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+      </footer>
     </div>
   );
 }

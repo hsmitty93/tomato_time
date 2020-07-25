@@ -1,23 +1,30 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect } from 'react';
+
+//Material Components
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem';
+import {
+    List,
+    ListItem,
+    TextField,
+    Divider,
+} from '@material-ui/core';
+
+//Local Components
 import { Task } from './task';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         backgroundColor: theme.palette.background.paper,
-        justifyContent: "center"
+        justifyContent: "center",
     },
     list: {
         paddingLeft: 0,
         paddingRight: 0,
-        maxHeight: 246,
-        overflow: 'auto'
+        maxHeight: 325,
+        overflow: 'auto',
+        width: "100%",
+        /* minHeight: 325 */
     },
     input: {
         flex: 1,
@@ -26,7 +33,12 @@ const useStyles = makeStyles((theme) => ({
     divider: {
         height: 2,
         marginBottom: 12,
-        marginTop: 12,
+        marginTop: 1,
+    },
+    addTask: {
+        justifyContent: "center",
+        padding: "10px",
+        alignItems: "center",
     }
 }));
 
@@ -42,7 +54,7 @@ function CreateTask({ addTask }) {
     }
 
     return (
-        <Paper component="form" className={classes.root} style={{ paddingTop: 8 }}>
+        <div className={classes.addTask}>
             <form onSubmit={handleSubmit} noValidate autoComplete="off" >
                 <TextField
                     className={classes.input}
@@ -52,7 +64,7 @@ function CreateTask({ addTask }) {
                     value={value}
                     onChange={(event) => setValue(event.target.value)} />
             </form>
-        </Paper>
+        </div>
     );
 }
 
@@ -61,35 +73,25 @@ function CreateTask({ addTask }) {
 function TaskList({ earnedTomato, setEarnedTomato, selectedTask, setSelectedTask }) {
     const classes = useStyles();
 
-    const [tasks, setTasks] = useState([
-        {
-            content: "create a task",
-            isCompleted: false,
-            estTomatos: 3,
-            tomatoValue: 2,
-        },
-        {
-            content: "another task",
-            isCompleted: false,
-            estTomatos: 1,
-            tomatoValue: 0,
-        },
-        {
-            content: "another nother task",
-            isCompleted: false,
-            estTomatos: 1,
-            tomatoValue: 0,
-        }
-    ])
+    const [tasks, setTasks] = useState([]);
 
     function addTask(value) {
-        const newTasksList = [...tasks, {
-            content: value,
-            isCompleted: false,
-            estTomatos: 1,
-            tomatoValue: 0,
-        }];
-        setTasks(newTasksList);
+        if (tasks.length === 0) {
+            setTasks([{
+                content: value,
+                isCompleted: false,
+                estTomatos: 1,
+                tomatoValue: 0,
+            }]);
+        } else {
+            const newTasksList = [...tasks, {
+                content: value,
+                isCompleted: false,
+                estTomatos: 1,
+                tomatoValue: 0,
+            }];
+            setTasks(newTasksList);
+        }
     }
 
     function updateTaskAtIndex(event, index) {
@@ -127,10 +129,12 @@ function TaskList({ earnedTomato, setEarnedTomato, selectedTask, setSelectedTask
     }
 
     useEffect(() => {
-        const newTasksList = [...tasks];
-        newTasksList[selectedTask].tomatoValue += earnedTomato;
-        setTasks(newTasksList);
-        setEarnedTomato(0);
+        if (tasks.length > 0) {
+            const newTasksList = [...tasks];
+            newTasksList[selectedTask].tomatoValue += earnedTomato;
+            setTasks(newTasksList);
+            setEarnedTomato(0);
+        }
     }, [earnedTomato])
 
     /* const TaskItem = memo((props) => {
@@ -158,22 +162,26 @@ function TaskList({ earnedTomato, setEarnedTomato, selectedTask, setSelectedTask
         <div className={classes.root}>
             <CreateTask addTask={addTask} />
             <Divider orientation="horizontal" className={classes.divider} />
-            <List className={classes.list}>
-                {tasks.map((task, index) =>
-                    <ListItem selected={selectedTask === index} onClick={(event) => handleListItemClick(event, index)}>
-                        <Task
-                            task={task}
-                            key={index}
-                            index={index}
-                            updateTaskAtIndex={updateTaskAtIndex}
-                            completeTask={completeTask}
-                            removeTask={removeTask}
-                            updateTomatoTime={updateTomatoTime}
-                        />
-                    </ListItem>
-                )}
+            <div className={classes.list}>
+                {tasks.length > 0 &&
+                    <List>
+                        {tasks.map((task, index) =>
+                            <ListItem selected={selectedTask === index} onClick={(event) => handleListItemClick(event, index)}>
+                                <Task
+                                    task={task}
+                                    key={index}
+                                    index={index}
+                                    updateTaskAtIndex={updateTaskAtIndex}
+                                    completeTask={completeTask}
+                                    removeTask={removeTask}
+                                    updateTomatoTime={updateTomatoTime}
+                                />
+                            </ListItem>
+                        )}
+                    </List>
+                }
+            </div>
 
-            </List>
         </div >
     )
 

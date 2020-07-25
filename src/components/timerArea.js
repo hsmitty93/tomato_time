@@ -1,24 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+
+//Material Components
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
-import { theme1 } from '../App';
-import { ThemeProvider } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import {
+    Card,
+    CardActionArea,
+    CardActions,
+    Button,
+    Tabs,
+    Tab,
+    Grid,
+} from '@material-ui/core';
+
+//Local Components
 import { Timer } from './timer';
 import { FinishedDialog } from './dialog';
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 500,
-        height: 500
+        minWidth: 370,
+        height: 500,
     },
     media: {
         height: 400,

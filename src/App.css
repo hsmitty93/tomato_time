@@ -1,38 +1,41 @@
 .App {
   text-align: center;
-  height: 100vh;
+  width: 100%;
 }
 
 .header {
   width: 100%;
+  background-color: #f44336;
   height: 7vh;
+  margin: 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  background-color: #f44336;
-  /* margin-bottom: 15px; */
+  text-align: center;
+  justify-content: center;
+
 }
+
+
 .title {
   color: white;
+  height: 100%;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 90vh;
-  width: 99%;
-} 
-
 .footer {
-  height: 3vh;
+  height: 2.4vh;
+
   background-color: #f44336;
   width:100%;
-  align-items: center;
-  justify-items: center;
- /*  margin-top: 15px; */
+
 }
 
 .App-link {
   color: #61dafb;
+}
+@media only screen and  (max-width: 425px) {
+  .header{
+    height: 10vh;
+    grid-template-columns: 1fr 1fr;
+  }
+
 }

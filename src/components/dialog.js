@@ -1,9 +1,9 @@
 import React from 'react';
+
+//Material Components
 import {
     Dialog,
     DialogActions,
-    DialogContent,
-    DialogContentText,
     DialogTitle,
     Button
 } from '@material-ui/core';

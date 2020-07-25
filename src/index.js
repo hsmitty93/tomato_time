@@ -1,7 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+//Styles
 import './index.css';
+
+//Local Components
 import App from './App';
+
+//Services
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

@@ -1,21 +1,28 @@
 import React from 'react';
+
+//Material Components
 import { makeStyles } from '@material-ui/core/styles';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import InputLabel from '@material-ui/core/InputLabel';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import {
+    Checkbox,
+    FormControl,
+    FormHelperText,
+    InputLabel,
+    IconButton,
+    Paper,
+    InputBase,
+    Popover,
+    Button,
+    Typography,
+    Select,
+    MenuItem,
+    SvgIcon,
+} from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import Popover from '@material-ui/core/Popover';
-import { Button, Typography } from '@material-ui/core';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+
+//Material Icons
+import DeleteIcon from '@material-ui/icons/Delete';
 import { ReactComponent as TomatoOutline } from '../tomatoOutline.svg';
 import { ReactComponent as TomatoFilled } from '../tomatoFilled.svg';
-import SvgIcon from '@material-ui/core/SvgIcon';
 
 const useStyles = makeStyles((theme) => ({
     root: {
