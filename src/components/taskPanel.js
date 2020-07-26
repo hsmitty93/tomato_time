@@ -9,14 +9,12 @@ import {
     IconButton,
     makeStyles,
     Grid,
-    useMediaQuery,
 } from '@material-ui/core';
 
 //Material Icons
 import {
     AddRounded,
     FilterListRounded,
-    Autorenew,
 } from '@material-ui/icons';
 
 //Local Components
@@ -24,15 +22,18 @@ import TaskList from './taskList';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        minHeight: "31.5em",
-        maxHeight: "31.5em",
+        minHeight: "37.5em",
+        maxHeight: "37.5em",
         minWidth: 370,
+        backgroundColor: "#ffbcaf"
     },
     toolbar: {
         alignItems: 'center',
         paddingRight: 0,
         paddingLeft: 0,
-        width: "100%"
+        width: "100%",
+        borderRadius: "2% 2% 0% 0%",
+        color: "black"
     },
     title: {
         fontSize: "2rem",
@@ -44,30 +45,27 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export function TaskPanel({ earnedTomato, setEarnedTomato, selectedTask, setSelectedTask }) {
+export function TaskPanel({ earnedTomato, setEarnedTomato, selectedTask, setSelectedTask, tasks, setTasks }) {
     const classes = useStyles();
 
     return (
         <Paper className={classes.root}>
-            <AppBar position="static" >
-                <Toolbar className={classes.toolbar}>
-                    <Grid container direction="row" justify="center">
+            <AppBar position="static" color="primary" styles={{ borderRadius: "2% 2% 0% 0%" }}>
+                <Toolbar className={classes.toolbar} disableGutters="true">
+                    <Grid container direction="row" justify="center" styles={{ borderRadius: "2% 2% 0% 0%" }}>
                         <Grid item xs={6} md={7}>
                             <Typography className={classes.title} varient="h6">
                                 Tasks
                             </Typography>
                         </Grid>
                         <Grid item xs={6} md={5} className={classes.iconButton}>
-                            <IconButton>
+                            <IconButton edge="start">
                                 <AddRounded />
                             </IconButton>
-                            <IconButton>
+                            <IconButton edge="end">
                                 <FilterListRounded />
                             </IconButton>
-
                         </Grid>
-
-
                     </Grid>
                 </Toolbar>
             </AppBar>
@@ -76,6 +74,8 @@ export function TaskPanel({ earnedTomato, setEarnedTomato, selectedTask, setSele
                 setEarnedTomato={setEarnedTomato}
                 selectedTask={selectedTask}
                 setSelectedTask={setSelectedTask}
+                tasks={tasks}
+                setTasks={setTasks}
             />
         </Paper >
 

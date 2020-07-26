@@ -5,7 +5,7 @@
 
 .header {
   width: 100%;
-  background-color: #f44336;
+  background-color: #ba000d;
   height: 7vh;
   margin: 0;
   display: grid;
@@ -23,10 +23,15 @@
 
 .footer {
   height: 2.4vh;
-
   background-color: #f44336;
   width:100%;
-
+  justify-content: center;
+  display: flex;
+  font-size: small;
+  align-items: center;
+}
+.footer > div {
+  width: 50%;
 }
 
 .App-link {
@@ -38,4 +43,7 @@
     grid-template-columns: 1fr 1fr;
   }
 
+  .footer {
+    height: 3vh;
+  }
 }

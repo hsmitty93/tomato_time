@@ -11,7 +11,16 @@ import {
     Tabs,
     Tab,
     Grid,
+    CardContent,
+    Paper,
+    SvgIcon,
+    Typography,
 } from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
+
+//Icons
+import { ReactComponent as TomatoOutline } from '../tomatoOutline.svg';
+import { ReactComponent as TomatoFilled } from '../tomatoFilled.svg';
 
 //Local Components
 import { Timer } from './timer';
@@ -20,7 +29,9 @@ import { FinishedDialog } from './dialog';
 const useStyles = makeStyles({
     root: {
         minWidth: 370,
-        height: 500,
+        height: 600,
+        borderRadius: "2%",
+        /* backgroundColor: "#ffbcaf" */
     },
     media: {
         height: 400,
@@ -34,7 +45,25 @@ const useStyles = makeStyles({
     },
     midHeight: {
         height: '85%'
+    },
+    flexContainer: {
+        backgroundColor: "#f44336",
+    },
+    wrapper: {
+        color: "black",
+
+    },
+    selected: {
+        backgroundColor: "#ff7960"
+    },
+    spacing: {
+        backgroundColor: "#f44336"
+    },
+    text: {
+        backgroundColor: "#ff7961",
+        fontWeight: 500
     }
+
 });
 
 function TabPanel(props) {
@@ -66,7 +95,7 @@ TabPanel.propTypes = {
     value: PropTypes.any.isRequired,
 };
 
-export function TimerArea({ setEarnedTomato }) {
+export function TimerArea({ setEarnedTomato, selectedTask, tasks }) {
     const classes = useStyles();
 
     const [value, setValue] = useState(0);
@@ -138,22 +167,20 @@ export function TimerArea({ setEarnedTomato }) {
     }, [workDone]);
 
     const prevValue = prevValueRef.current;
-    console.log(prevValue)
-
-
 
     return (
         <Card className={classes.root}>
             <Tabs
+                classes={{ flexContainer: classes.flexContainer }}
                 value={value}
                 onChange={handleChange}
-                indicatorColor="primary"
-                textColor="primary"
+                indicatorColor="secondary"
+                textColor="secondary"
                 centered
             >
-                <Tab label="Work" />
-                <Tab label="Short Break" />
-                <Tab label="Long Break" />
+                <Tab classes={{ wrapper: classes.wrapper, selected: classes.selected }} label="Work" />
+                <Tab classes={{ wrapper: classes.wrapper, selected: classes.selected }} label="Short Break" />
+                <Tab classes={{ wrapper: classes.wrapper, selected: classes.selected }} label="Long Break" />
             </Tabs>
             <CardActionArea className={classes.media} onClick={toggle}>
                 <TabPanel value={value} index={0}>
@@ -166,10 +193,21 @@ export function TimerArea({ setEarnedTomato }) {
                     <Timer timer={timers[2]} isActive={isActive} isRestart={isRestart} setRestart={setRestart} setWorkDone={setWorkDone} reset={reset} />
                 </TabPanel>
             </CardActionArea>
+            <CardContent style={{ height: 52 }}>
+                {tasks.length > 0 &&
+                    <Paper elevation="4" style={{ width: "100%", display: "flex", padding: 5 }}>
+                        <div style={{ width: "50%" }}>
+                            <Typography varient="subtitle1">Current Task: {tasks[selectedTask].content}</Typography>
+                        </div>
+                        <div style={{ width: "50%" }}>
+                            <Rating emptyIcon={<SvgIcon component={TomatoOutline} viewBox="0 0 512.002 512.002" />} icon={<SvgIcon component={TomatoFilled} viewBox="0 0 512.002 512.002" />} readOnly={true} max={(tasks[selectedTask].tomatoValue > tasks[selectedTask].estTomatos) ? tasks[selectedTask].tomatoValue : tasks[selectedTask].estTomatos} value={tasks[selectedTask].tomatoValue} />
+                        </div>
 
-            <CardActions style={{ justifyContent: "center" }}>
-                <Button onClick={toggle}>{isActive ? "Pause" : "Start"}</Button>
-                <Button onClick={reset}>Restart</Button>
+                    </Paper>}
+            </CardContent>
+            <CardActions style={{ justifyContent: "space-around", height: 52 }} classes={{ spacing: classes.spacing }}>
+                <Button classes={{ text: classes.text }} onClick={toggle} color="#000000" varient="outlined">{isActive ? "Pause" : "Start"}</Button>
+                <Button classes={{ text: classes.text }} onClick={reset} color="#000000" varient="outlined">Restart</Button>
             </CardActions>
             <FinishedDialog
                 openDialog={openDialog}

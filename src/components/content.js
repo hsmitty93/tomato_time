@@ -20,6 +20,7 @@ export function Content() {
 
     const [selectedTask, setSelectedTask] = useState(0);
     const [earnedTomato, setEarnedTomato] = useState(0);
+    const [tasks, setTasks] = useState([]);
 
     const styles = {
         container: {
@@ -32,18 +33,24 @@ export function Content() {
 
     return (
         <ThemeProvider theme={theme1}>
-            <Grid container style={styles.container} spacing={2} direction="row" justify="space-around" alignItems="center">
+            <Grid container style={styles.container} spacing={2} direction="row" justify="center" alignItems="center">
                 <Grid item md={6}>
                     <TaskPanel
                         earnedTomato={earnedTomato}
                         setEarnedTomato={setEarnedTomato}
                         selectedTask={selectedTask}
                         setSelectedTask={setSelectedTask}
+                        tasks={tasks}
+                        setTasks={setTasks}
                     />
                 </Grid>
 
                 <Grid item md={6}>
-                    <TimerArea setEarnedTomato={setEarnedTomato} />
+                    <TimerArea
+                        setEarnedTomato={setEarnedTomato}
+                        selectedTask={selectedTask}
+                        tasks={tasks}
+                    />
                 </Grid>
 
             </Grid>

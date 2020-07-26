@@ -1,8 +1,5 @@
 import React from 'react';
 
-//Material Components
-import { Grid } from '@material-ui/core';
-
 //Styles
 import { createMuiTheme } from '@material-ui/core/styles';
 import './App.css';
@@ -54,9 +51,14 @@ export default function App() {
       <Content />
 
       <footer className="footer">
-        <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div>
+          Created by Hailey Smith
+        </div>
+        <div>
+          Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+        </div>
       </footer>
-    </div>
+    </div >
   );
 }
 

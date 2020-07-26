@@ -118,7 +118,7 @@ export function Task({ task, index, completeTask, removeTask, updateTaskAtIndex,
 
             </Popover>
 
-            <IconButton className={classes.iconButton} onClick={() => removeTask(index)} aria-label="delete">
+            <IconButton color="primary" className={classes.iconButton} onClick={() => removeTask(index)} aria-label="delete">
                 <DeleteIcon />
             </IconButton>
         </Paper>

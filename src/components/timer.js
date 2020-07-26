@@ -13,6 +13,7 @@ const useStyles = makeStyles({
         width: 300,
         height: 300,
         borderRadius: '50%',
+        backgroundColor: "#b4ffff"
     },
     number: {
         fontSize: "4rem",
@@ -60,7 +61,7 @@ export function Timer({ timer, isActive, isRestart, setRestart, setWorkDone, res
     }, [isActive, minutes, seconds, isRestart]);
 
     return (
-        <Paper className={classes.root}>
+        <Paper className={classes.root} elevation="4">
             <Typography className={classes.number} varient="h1" component="h1">
                 {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
             </Typography>
