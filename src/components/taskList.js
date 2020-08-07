@@ -104,11 +104,7 @@ function TaskList({ earnedTomato, setEarnedTomato, selectedTask, setSelectedTask
 
     const completeTask = (index) => {
         const newTasksList = [...tasks];
-        if (newTasksList[index].isCompleted) {
-            newTasksList[index].isCompleted = false;
-        } else {
-            newTasksList[index].isCompleted = true;
-        }
+        newTasksList[index].isCompleted = !newTasksList[index].isCompleted;
         setTasks(newTasksList);
     }
 

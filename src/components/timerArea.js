@@ -98,7 +98,7 @@ TabPanel.propTypes = {
 export function TimerArea({ setEarnedTomato, selectedTask, tasks }) {
     const classes = useStyles();
 
-    const [value, setValue] = useState(0);
+    const [activeTimer, setActiveTimer] = useState(0);
     const [timers, setTimer] = useState([
         {
             type: "work",
@@ -123,8 +123,8 @@ export function TimerArea({ setEarnedTomato, selectedTask, tasks }) {
     const [openDialog, setOpenDialog] = useState(false);
     const [breaks, setBreaks] = useState(0);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
+    const handleChange = (event, newActiveTimer) => {
+        setActiveTimer(newActiveTimer);
         reset();
     };
 
@@ -136,29 +136,29 @@ export function TimerArea({ setEarnedTomato, selectedTask, tasks }) {
         setRestart(true);
         setIsActive(false);
     }
-
-    const prevValueRef = useRef();
+    //Create a ref to save which timer was previously active
+    const prevActiveTimerRef = useRef();
 
 
     useEffect(() => {
         if (workDone) {
-            prevValueRef.current = value
-            switch (value) {
+            prevActiveTimerRef.current = activeTimer;
+            switch (activeTimer) {
                 case 0:
                     setEarnedTomato(1);
                     if (breaks <= 4) {
-                        setValue(1);
+                        setActiveTimer(1);
                     } else {
-                        setValue(2);
+                        setActiveTimer(2);
                     }
                     break;
                 case 1:
                     setBreaks((p) => p + 1);
-                    setValue(0);
+                    setActiveTimer(0);
                     break;
                 case 2:
                     setBreaks(0);
-                    setValue(0);
+                    setActiveTimer(0);
                     break;
             }
             setOpenDialog(true);
@@ -166,13 +166,13 @@ export function TimerArea({ setEarnedTomato, selectedTask, tasks }) {
         }
     }, [workDone]);
 
-    const prevValue = prevValueRef.current;
+    const prevActiveTimer = prevActiveTimerRef.current;
 
     return (
         <Card className={classes.root}>
             <Tabs
                 classes={{ flexContainer: classes.flexContainer }}
-                value={value}
+                value={activeTimer}
                 onChange={handleChange}
                 indicatorColor="secondary"
                 textColor="secondary"
@@ -183,36 +183,71 @@ export function TimerArea({ setEarnedTomato, selectedTask, tasks }) {
                 <Tab classes={{ wrapper: classes.wrapper, selected: classes.selected }} label="Long Break" />
             </Tabs>
             <CardActionArea className={classes.media} onClick={toggle}>
-                <TabPanel value={value} index={0}>
-                    <Timer timer={timers[0]} isActive={isActive} isRestart={isRestart} setRestart={setRestart} setWorkDone={setWorkDone} reset={reset} />
+                <TabPanel value={activeTimer} index={0}>
+                    <Timer
+                        timer={timers[0]}
+                        isActive={isActive}
+                        isRestart={isRestart}
+                        setRestart={setRestart}
+                        setWorkDone={setWorkDone}
+                        reset={reset}
+                    />
                 </TabPanel>
-                <TabPanel value={value} index={1}>
-                    <Timer timer={timers[1]} isActive={isActive} isRestart={isRestart} setRestart={setRestart} setWorkDone={setWorkDone} reset={reset} />
+                <TabPanel value={activeTimer} index={1}>
+                    <Timer
+                        timer={timers[1]}
+                        isActive={isActive}
+                        isRestart={isRestart}
+                        setRestart={setRestart}
+                        setWorkDone={setWorkDone}
+                        reset={reset}
+                    />
                 </TabPanel>
-                <TabPanel value={value} index={2}>
-                    <Timer timer={timers[2]} isActive={isActive} isRestart={isRestart} setRestart={setRestart} setWorkDone={setWorkDone} reset={reset} />
+                <TabPanel value={activeTimer} index={2}>
+                    <Timer
+                        timer={timers[2]}
+                        isActive={isActive}
+                        isRestart={isRestart}
+                        setRestart={setRestart}
+                        setWorkDone={setWorkDone}
+                        reset={reset}
+                    />
                 </TabPanel>
             </CardActionArea>
             <CardContent style={{ height: 52 }}>
-                {tasks.length > 0 &&
+                {tasks.length > 0 && tasks[selectedTask].isCompleted == false &&
                     <Paper elevation="4" style={{ width: "100%", display: "flex", padding: 5 }}>
                         <div style={{ width: "50%" }}>
                             <Typography varient="subtitle1">Current Task: {tasks[selectedTask].content}</Typography>
                         </div>
                         <div style={{ width: "50%" }}>
-                            <Rating emptyIcon={<SvgIcon component={TomatoOutline} viewBox="0 0 512.002 512.002" />} icon={<SvgIcon component={TomatoFilled} viewBox="0 0 512.002 512.002" />} readOnly={true} max={(tasks[selectedTask].tomatoValue > tasks[selectedTask].estTomatos) ? tasks[selectedTask].tomatoValue : tasks[selectedTask].estTomatos} value={tasks[selectedTask].tomatoValue} />
+                            <Rating
+                                emptyIcon={<SvgIcon component={TomatoOutline} viewBox="0 0 512.002 512.002" />}
+                                icon={<SvgIcon component={TomatoFilled} viewBox="0 0 512.002 512.002" />}
+                                readOnly={true}
+                                max={(tasks[selectedTask].tomatoValue > tasks[selectedTask].estTomatos) ?
+                                    tasks[selectedTask].tomatoValue : tasks[selectedTask].estTomatos}
+                                value={tasks[selectedTask].tomatoValue}
+                            />
                         </div>
 
                     </Paper>}
             </CardContent>
             <CardActions style={{ justifyContent: "space-around", height: 52 }} classes={{ spacing: classes.spacing }}>
-                <Button classes={{ text: classes.text }} onClick={toggle} color="#000000" varient="outlined">{isActive ? "Pause" : "Start"}</Button>
+                <Button
+                    classes={{ text: classes.text }}
+                    onClick={toggle}
+                    color="#000000"
+                    varient="outlined"
+                >
+                    {isActive ? "Pause" : "Start"}
+                </Button>
                 <Button classes={{ text: classes.text }} onClick={reset} color="#000000" varient="outlined">Restart</Button>
             </CardActions>
             <FinishedDialog
                 openDialog={openDialog}
                 setOpenDialog={setOpenDialog}
-                value={prevValue}
+                value={prevActiveTimer}
             />
         </Card>
     )
