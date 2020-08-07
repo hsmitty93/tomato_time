@@ -21,8 +21,8 @@ import Rating from '@material-ui/lab/Rating';
 
 //Material Icons
 import DeleteIcon from '@material-ui/icons/Delete';
-import { ReactComponent as TomatoOutline } from '../tomatoOutline.svg';
-import { ReactComponent as TomatoFilled } from '../tomatoFilled.svg';
+import { ReactComponent as TomatoOutline } from '../assets/tomatoOutline.svg';
+import { ReactComponent as TomatoFilled } from '../assets/tomatoFilled.svg';
 
 const useStyles = makeStyles((theme) => ({
     root: {

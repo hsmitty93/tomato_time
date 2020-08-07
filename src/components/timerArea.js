@@ -19,8 +19,8 @@ import {
 import Rating from '@material-ui/lab/Rating';
 
 //Icons
-import { ReactComponent as TomatoOutline } from '../tomatoOutline.svg';
-import { ReactComponent as TomatoFilled } from '../tomatoFilled.svg';
+import { ReactComponent as TomatoOutline } from '../assets/tomatoOutline.svg';
+import { ReactComponent as TomatoFilled } from '../assets/tomatoFilled.svg';
 
 //Local Components
 import { Timer } from './timer';
@@ -153,7 +153,7 @@ export function TimerArea({ setEarnedTomato, selectedTask, tasks }) {
                     }
                     break;
                 case 1:
-                    setBreaks((p) => p + 1);
+                    setBreaks((b) => b + 1);
                     setActiveTimer(0);
                     break;
                 case 2:
