@@ -1,68 +1,23 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and uses the Material UI framework (https://material-ui.com/).
 
-## Available Scripts
+## Currently deployed on Github Pages at https://hsmitty93.github.io/tomato_time/
 
-In the project directory, you can run:
+## About
+This project was created to learn more about building react apps. If you're not familiar with pomodoro time management, it works by having you spend 25min focusing on a task then having 5 min as a break. This repeats, until the 4th time you spend 25min focused on the task then you recieve a longer break. With my web app I joined the pomodoro timer and a tasks app together. You can create a task, assign how long you think it's going to take to complete it. (In the form of tomato icons, each tomato = 25min of work) Select a task to work on and start the work timer! After 25min of work and a break you will see a tomato filled on your selected task, indicating you have spent 25min working on that task. 
 
-### `yarn start`
+## Current Features
+- Indicate how long you expect to work on a task
+- Shows indication of how long you've been working on a selected task
+- Add, delete and complete a task
+- Pomodoro timer for work, short and long breaks.
 
-Runs the app in the development mode.<br />
+## Future Features
+- Persistant storage for tasks
+- Settings for changing timer length for work, short and long breaks.
+- Filter tasks based on completion, not started and currently in progress tasks
+- Improve design and responsiviness for smaller screen sizes
+
+## Run Locally
+After cloning this repository, go to the folder where it was cloned to, open a terminal and run "npm install" (make sure to have node installed). After that is completed, enter "npm run start", this runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
