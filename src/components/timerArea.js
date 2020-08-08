@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import useSound from 'use-sound';
 
 //Material Components
 import { makeStyles } from '@material-ui/core/styles';
@@ -21,6 +22,9 @@ import Rating from '@material-ui/lab/Rating';
 //Icons
 import { ReactComponent as TomatoOutline } from '../assets/tomatoOutline.svg';
 import { ReactComponent as TomatoFilled } from '../assets/tomatoFilled.svg';
+
+//Sounds
+import notificationSfx from '../assets/dialogNoise.mp3';
 
 //Local Components
 import { Timer } from './timer';
@@ -97,13 +101,14 @@ TabPanel.propTypes = {
 
 export function TimerArea({ setEarnedTomato, selectedTask, tasks }) {
     const classes = useStyles();
+    const [playDialog, { stop, isPlaying }] = useSound(notificationSfx);
 
     const [activeTimer, setActiveTimer] = useState(0);
     const [timers, setTimer] = useState([
         {
             type: "work",
-            minutes: 25,
-            seconds: 0,
+            minutes: 0,
+            seconds: 5,
         },
         {
             type: "short",
@@ -127,6 +132,11 @@ export function TimerArea({ setEarnedTomato, selectedTask, tasks }) {
         setActiveTimer(newActiveTimer);
         reset();
     };
+
+    const handleDialogClick = () => {
+        stop();
+        setOpenDialog(false)
+    }
 
     function toggle() {
         setIsActive(!isActive);
@@ -165,6 +175,13 @@ export function TimerArea({ setEarnedTomato, selectedTask, tasks }) {
             setWorkDone(false);
         }
     }, [workDone]);
+
+    useEffect(() => {
+        if (openDialog && isPlaying == false) {
+            playDialog();
+        }
+    }, [openDialog])
+
 
     const prevActiveTimer = prevActiveTimerRef.current;
 
@@ -248,6 +265,7 @@ export function TimerArea({ setEarnedTomato, selectedTask, tasks }) {
                 openDialog={openDialog}
                 setOpenDialog={setOpenDialog}
                 value={prevActiveTimer}
+                onClick={handleDialogClick}
             />
         </Card>
     )
