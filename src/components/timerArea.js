@@ -107,8 +107,8 @@ export function TimerArea({ setEarnedTomato, selectedTask, tasks }) {
     const [timers, setTimer] = useState([
         {
             type: "work",
-            minutes: 0,
-            seconds: 5,
+            minutes: 25,
+            seconds: 0,
         },
         {
             type: "short",
