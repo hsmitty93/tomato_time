@@ -71,9 +71,9 @@ function CreateTask({ addTask }) {
 
 
 
-function TaskList({ earnedTomato, setEarnedTomato, selectedTask, setSelectedTask, tasks, setTasks }) {
+function TaskList({ earnedTomato, setEarnedTomato, selectedTask, setSelectedTask, tasks, setTasks, onTaskChange}) {
     const classes = useStyles();
-    console.log(tasks)
+    //console.log(tasks)
 
     function addTask(value) {
         if (tasks.length === 0) {
@@ -111,6 +111,9 @@ function TaskList({ earnedTomato, setEarnedTomato, selectedTask, setSelectedTask
     const removeTask = (index) => {
         const newTasksList = [...tasks];
         newTasksList.splice(index, 1);
+        if(selectedTask === index){
+            setSelectedTask(0);
+        }
         setTasks(newTasksList)
     }
 
@@ -134,10 +137,15 @@ function TaskList({ earnedTomato, setEarnedTomato, selectedTask, setSelectedTask
         }
     }, [earnedTomato])
 
+    useEffect(() => {
+        console.log(`Tasks in TaskPanel: ${tasks}`)
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }, [tasks])
+
     return (
-        <div className={classes.root}>
+        <div className={classes.root} >
             <CreateTask addTask={addTask} />
-            <div className={classes.list}>
+            <div className={classes.list} >
                 {tasks.length > 0 &&
                     <List>
                         {tasks.map((task, index) =>

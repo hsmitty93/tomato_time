@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 //Material Components
 import {
@@ -13,14 +13,17 @@ import { TimerArea } from './timerArea';
 //Style
 import { theme1 } from '../App';
 
-
-
-
 export function Content() {
 
     const [selectedTask, setSelectedTask] = useState(0);
     const [earnedTomato, setEarnedTomato] = useState(0);
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState(() => {
+        if (localStorage.getItem('tasks') === null){
+            return [];
+        } else {
+            return JSON.parse(localStorage.getItem("tasks"));
+        }
+    });
 
     const styles = {
         container: {

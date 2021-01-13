@@ -232,7 +232,7 @@ export function TimerArea({ setEarnedTomato, selectedTask, tasks }) {
                 </TabPanel>
             </CardActionArea>
             <CardContent style={{ height: 52 }}>
-                {tasks.length > 0 && tasks[selectedTask].isCompleted == false &&
+                {tasks.length > 0 && tasks[selectedTask] && tasks[selectedTask].isCompleted == false &&
                     <Paper elevation="4" style={{ width: "100%", display: "flex", padding: 5 }}>
                         <div style={{ width: "50%" }}>
                             <Typography varient="subtitle1">Current Task: {tasks[selectedTask].content}</Typography>
