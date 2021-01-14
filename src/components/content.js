@@ -18,10 +18,10 @@ export function Content() {
     const [selectedTask, setSelectedTask] = useState(0);
     const [earnedTomato, setEarnedTomato] = useState(0);
     const [tasks, setTasks] = useState(() => {
-        if (localStorage.getItem('tasks') === null){
+        if (sessionStorage.getItem('tasks') === null){
             return [];
         } else {
-            return JSON.parse(localStorage.getItem("tasks"));
+            return JSON.parse(sessionStorage.getItem("tasks"));
         }
     });
 

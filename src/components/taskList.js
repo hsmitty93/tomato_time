@@ -139,7 +139,7 @@ function TaskList({ earnedTomato, setEarnedTomato, selectedTask, setSelectedTask
 
     useEffect(() => {
         console.log(`Tasks in TaskPanel: ${tasks}`)
-        localStorage.setItem('tasks', JSON.stringify(tasks));
+        sessionStorage.setItem('tasks', JSON.stringify(tasks));
     }, [tasks])
 
     return (
